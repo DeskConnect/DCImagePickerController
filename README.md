@@ -10,7 +10,7 @@ It requires access to all of the user's photos.
 
 ## Todo
 
-- Display overlay on videos
+- Make UI a pixel perfect copy (right now it's off by a few)
 
 ## License
 
