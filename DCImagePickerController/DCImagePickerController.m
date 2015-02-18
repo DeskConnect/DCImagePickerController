@@ -748,7 +748,7 @@ static char customFilterKey;
                 [assetInfo setValue:[asset valueForProperty:ALAssetPropertyType] forKey:UIImagePickerControllerMediaType];
                 [assetInfo setValue:[UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage] forKey:UIImagePickerControllerOriginalImage];
                 [infos addObject:assetInfo];
-                [assets addObject:asset];
+                [assets addObject:(asset ?: [NSNull null])];
                 dispatch_group_leave(group);
             } failureBlock:^(NSError *error) {
                 [infos addObject:assetInfo];
