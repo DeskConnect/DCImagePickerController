@@ -589,13 +589,14 @@ static char customFilterKey;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Photos";
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self.imagePickerController action:@selector(cancel)];
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self.imagePickerController action:@selector(cancel)];
 
     self.tableView.rowHeight = 86.0f;
     self.tableView.separatorColor = [UIColor clearColor];
