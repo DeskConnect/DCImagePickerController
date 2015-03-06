@@ -668,6 +668,8 @@ static char customFilterKey;
     ALAssetsFilter *_assetsFilter;
 }
 
+@dynamic delegate;
+
 + (BOOL)isSourceTypeAvailable:(DCImagePickerControllerSourceType)sourceType {
     if (sourceType == DCImagePickerControllerSourceTypePhotoLibrary || sourceType == DCImagePickerControllerSourceTypeSavedPhotosAlbum) {
         ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
