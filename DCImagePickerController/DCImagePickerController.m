@@ -585,11 +585,13 @@ static char customFilterKey;
     return (DCImagePickerController *)self.navigationController;
 }
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title = @"Photos";
-    }
+- (instancetype)init {
+    self = [super init];
+    if (!self)
+        return nil;
+    
+    self.title = @"Photos";
+    
     return self;
 }
 
