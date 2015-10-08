@@ -31,5 +31,6 @@ typedef NS_ENUM(NSInteger, DCImagePickerControllerSourceType) {
 @property (nonatomic, copy) NSArray *mediaTypes;
 @property (nonatomic) NSUInteger minimumNumberOfItems;
 @property (nonatomic) NSUInteger maximumNumberOfItems;
+@property (nonatomic) BOOL originalImageNotRequired; // Result media info dictionary will only include UIImagePickerControllerReferenceURL
 
 @end
