@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSInteger, DCImagePickerControllerSourceType) {
     DCImagePickerControllerSourceTypePhotoLibrary = UIImagePickerControllerSourceTypePhotoLibrary,
     DCImagePickerControllerSourceTypeSavedPhotosAlbum = UIImagePickerControllerSourceTypeSavedPhotosAlbum
@@ -14,23 +16,27 @@ typedef NS_ENUM(NSInteger, DCImagePickerControllerSourceType) {
 
 @class DCImagePickerController;
 
-@protocol DCImagePickerControllerDelegate <UINavigationControllerDelegate>
+@protocol DCImagePickerControllerDelegate <NSObject>
 @optional
 - (void)dcImagePickerController:(DCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info;
 - (void)dcImagePickerControllerDidCancel:(DCImagePickerController *)picker;
 @end
 
+extern NSString * const DCImagePickerControllerAsset;
+
 @interface DCImagePickerController : UINavigationController
 
 + (BOOL)isSourceTypeAvailable:(DCImagePickerControllerSourceType)sourceType;
-+ (NSArray *)availableMediaTypesForSourceType:(DCImagePickerControllerSourceType)sourceType;
++ (NSArray<NSString *> *)availableMediaTypesForSourceType:(DCImagePickerControllerSourceType)sourceType;
 
-@property (nonatomic, weak) id <DCImagePickerControllerDelegate> delegate;
+@property (nonatomic, weak) id <UINavigationControllerDelegate, DCImagePickerControllerDelegate> delegate;
 
 @property (nonatomic) DCImagePickerControllerSourceType sourceType;
-@property (nonatomic, copy) NSArray *mediaTypes;
+@property (nonatomic, copy) NSArray<NSString *> *mediaTypes;
 @property (nonatomic) NSUInteger minimumNumberOfItems;
 @property (nonatomic) NSUInteger maximumNumberOfItems;
-@property (nonatomic) BOOL originalImageNotRequired; // Result media info dictionary will only include UIImagePickerControllerReferenceURL
+@property (nonatomic) BOOL originalImageNotRequired; // Result media info dictionary will only include UIImagePickerControllerReferenceURL and DCImagePickerControllerAsset
 
 @end
+
+NS_ASSUME_NONNULL_END

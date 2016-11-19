@@ -10,7 +10,7 @@
 #import "DCImagePickerController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
-@interface ViewController () <DCImagePickerControllerDelegate, UIImagePickerControllerDelegate>
+@interface ViewController () <DCImagePickerControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end
 
@@ -34,9 +34,9 @@
     [self.view addSubview:systemButton];
 
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:customButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:customButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:-20.0f]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:customButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:-40.0f]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:systemButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:systemButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:20.0f]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:systemButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:40.0f]];
 }
 
 - (void)showCustomImagePicker {

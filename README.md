@@ -1,16 +1,20 @@
 # DCImagePickerController
 
-`DCImagePickerController` is a drop-in replacement for `UIImagePickerController` that supports selecting multuple items. It is styled after the `UIImagePickerController` found in iOS 7 and above, but it works back to iOS 5.
+`DCImagePickerController` is a drop-in replacement for `UIImagePickerController` that supports selecting multiple items. It is styled after, and nearly identical to, the `UIImagePickerController` found in iOS 7 and above. It uses `Photos.framework`.
 
 ## Example Usage
 
-`DCImagePickerController` works exactly like `UIImagePickerController`, except without any camera functionality and with two new properties, `minimumNumberOfItems` and `maximumNumberOfItems`.
+`DCImagePickerController` works exactly like `UIImagePickerController`, except without any camera functionality and with two new properties, `minimumNumberOfItems` and `maximumNumberOfItems`:
 
-It requires access to all of the user's photos.
+```objc
+DCImagePickerController *imagePickerController = [[DCImagePickerController alloc] init];
+imagePickerController.minimumNumberOfItems = 2;
+imagePickerController.maximumNumberOfItems = 5;
+imagePickerController.delegate = self;
+imagePickerController.modalPresentationStyle = UIModalPresentationFormSheet;
 
-## Todo
-
-- Make UI a pixel perfect copy (right now it's off by a few)
+[self presentViewController:imagePickerController animated:YES completion:nil];
+```
 
 ## License
 

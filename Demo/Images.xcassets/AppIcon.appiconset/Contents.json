@@ -96,19 +96,19 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "car",
-      "size" : "120x120",
-      "scale" : "1x"
+      "idiom" : "ipad",
+      "size" : "83.5x83.5",
+      "scale" : "2x"
     },
     {
-      "size" : "14.5x14.5",
+      "size" : "24x24",
       "idiom" : "watch",
       "scale" : "2x",
       "role" : "notificationCenter",
       "subtype" : "38mm"
     },
     {
-      "size" : "18x18",
+      "size" : "27.5x27.5",
       "idiom" : "watch",
       "scale" : "2x",
       "role" : "notificationCenter",
@@ -121,7 +121,7 @@
       "scale" : "2x"
     },
     {
-      "size" : "29.3x29.3",
+      "size" : "29x29",
       "idiom" : "watch",
       "role" : "companionSettings",
       "scale" : "3x"
@@ -132,13 +132,6 @@
       "scale" : "2x",
       "role" : "appLauncher",
       "subtype" : "38mm"
-    },
-    {
-      "size" : "44x44",
-      "idiom" : "watch",
-      "scale" : "2x",
-      "role" : "appLauncher",
-      "subtype" : "42mm"
     },
     {
       "size" : "86x86",
