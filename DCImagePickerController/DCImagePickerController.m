@@ -586,9 +586,16 @@ static NSString * const DCAssetCollectionFooterViewIdentifier = @"DCAssetCollect
     // Fetch the first three assets from the collection
     PHFetchOptions *options = [PHFetchOptions new];
     options.wantsIncrementalChangeDetails = NO;
-    options.fetchLimit = 3;
+    const NSUInteger fetchLimit = 3;
     
-    PHFetchResult<PHAsset *> *result = [PHAsset fetchKeyAssetsInAssetCollection:assetCollection options:options];
+    PHFetchResult<PHAsset *> *result = nil;
+    if ([options respondsToSelector:@selector(setFetchLimit:)]) {
+        options.fetchLimit = fetchLimit;
+        result = [PHAsset fetchKeyAssetsInAssetCollection:assetCollection options:options];
+    } else {
+        // On iOS 8, -fetchKeyAssetsInAssetCollection:options: doesn't appear to return any results
+        result = [PHAsset fetchAssetsInAssetCollection:assetCollection options:options];
+    }
     
     CGFloat width = 68.0f;
     CGFloat height = width + 6.0f;
@@ -605,13 +612,16 @@ static NSString * const DCAssetCollectionFooterViewIdentifier = @"DCAssetCollect
     
     dispatch_group_t group = dispatch_group_create();
 
-    [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL * __nonnull stop) {
+    [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger index, BOOL * __nonnull stop) {
         CGSize size = CGSizeApplyAffineTransform(CGSizeMake(width, height), CGAffineTransformMakeScale(scale, scale));
         dispatch_group_enter(group);
         [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFill options:imageOptions resultHandler:^(UIImage * __nullable result, NSDictionary * __nullable info) {
-            [images replacePointerAtIndex:idx withPointer:(__bridge void *)result];
+            [images replacePointerAtIndex:index withPointer:(__bridge void *)result];
             dispatch_group_leave(group);
         }];
+        
+        if (index == (fetchLimit - 1))
+            *stop = YES;
     }];
     
     // Draw the first three thumbnails one on top of the other to appear like a stack
