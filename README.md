@@ -1,6 +1,6 @@
 # DCImagePickerController
 
-`DCImagePickerController` is a drop-in replacement for `UIImagePickerController` that supports selecting multiple items. It is styled after, and nearly identical to, the `UIImagePickerController` found in iOS 7 and above. It uses `Photos.framework`.
+`DCImagePickerController` is a drop-in replacement for `UIImagePickerController` that supports selecting multiple items. It is styled after, and nearly identical to, the `UIImagePickerController` found in iOS 7 and above. Because it depends on `Photos.framework`, `DCImagePickerController` requires iOS 8.
 
 ## Example Usage
 

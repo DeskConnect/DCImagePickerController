@@ -5,7 +5,6 @@
 //  Copyright (c) 2014 DeskConnect, LLC. All rights reserved.
 //
 
-#import <AssetsLibrary/AssetsLibrary.h>
 #import <Photos/Photos.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
@@ -54,7 +53,7 @@ static NSURL * __nullable DCALAssetURLFromPHAsset(PHAsset *asset) {
     return [NSURL URLWithString:[NSString stringWithFormat:@"assets-library://asset/asset.JPG?id=%@", identifier]];
 }
 
-static void DCOverylayDetailsOnPHAssetImage(PHAsset *asset, CGSize size, UIImage *image, void (^completion)(UIImage *)) {
+static void DCOverlayDetailsOnPHAssetImage(PHAsset *asset, CGSize size, UIImage *image, void (^completion)(UIImage *)) {
     BOOL video = (asset.mediaType == PHAssetMediaTypeVideo);
     BOOL duration = (asset.duration > 0);
     if (!video && !duration)
@@ -213,7 +212,7 @@ static void DCOverylayDetailsOnPHAssetImage(PHAsset *asset, CGSize size, UIImage
         if ([info[PHImageCancelledKey] boolValue])
             return;
         
-        DCOverylayDetailsOnPHAssetImage(asset, size, result, ^(UIImage *image) {
+        DCOverlayDetailsOnPHAssetImage(asset, size, result, ^(UIImage *image) {
             if ([self.asset isEqual:asset]) {
                 self.backgroundView.image = image;
             }
@@ -328,11 +327,11 @@ static void DCOverylayDetailsOnPHAssetImage(PHAsset *asset, CGSize size, UIImage
     NSMutableArray<NSString *> *components = [NSMutableArray new];
     NSUInteger numberOfPhotos = [fetchResult countOfAssetsWithMediaType:PHAssetMediaTypeImage];
     if (numberOfPhotos)
-        [components addObject:[NSString stringWithFormat:@"%lu Photos", (unsigned long)numberOfPhotos]];
+        [components addObject:[NSString stringWithFormat:@"%lu Photo%@", (unsigned long)numberOfPhotos, (numberOfPhotos == 1 ? @"" : @"s")]];
     
     NSUInteger numberOfVideos = [fetchResult countOfAssetsWithMediaType:PHAssetMediaTypeVideo];
     if (numberOfVideos)
-        [components addObject:[NSString stringWithFormat:@"%lu Videos", (unsigned long)numberOfVideos]];
+        [components addObject:[NSString stringWithFormat:@"%lu Video%@", (unsigned long)numberOfVideos, (numberOfPhotos == 1 ? @"" : @"s")]];
     
     self.summaryLabel.text = [components componentsJoinedByString:@", "];
 }
@@ -924,7 +923,7 @@ static NSString * const DCCollectionTableViewCellIdentifier = @"DCCollectionTabl
 
 #pragma mark - DCImagePickerController
 
-NSString * const DCImagePickerControllerAsset = @"DCImagePickerControllerAsset";
+NSString * const DCImagePickerControllerPHAsset = @"DCImagePickerControllerPHAsset";
 
 @implementation DCImagePickerController
 
@@ -1032,7 +1031,7 @@ NSString * const DCImagePickerControllerAsset = @"DCImagePickerControllerAsset";
     NSMutableArray<NSDictionary *> *assetInfos = [NSMutableArray new];
     
     [assets enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
-        NSMutableDictionary *assetInfo = [[NSMutableDictionary alloc] initWithObjectsAndKeys:asset, DCImagePickerControllerAsset, nil];
+        NSMutableDictionary *assetInfo = [[NSMutableDictionary alloc] initWithObjectsAndKeys:asset, DCImagePickerControllerPHAsset, nil];
         [assetInfos addObject:assetInfo];
         
         NSString *mediaType = DCMediaTypeFromPHAsset(asset);
