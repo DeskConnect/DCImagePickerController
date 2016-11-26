@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, DCImagePickerControllerSourceType) {
 
 @protocol DCImagePickerControllerDelegate <NSObject>
 @optional
-- (void)dcImagePickerController:(DCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info;
+- (void)dcImagePickerController:(DCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray<NSDictionary *> *)info;
 - (void)dcImagePickerControllerDidCancel:(DCImagePickerController *)picker;
 @end
 
@@ -35,7 +35,7 @@ extern NSString * const DCImagePickerControllerPHAsset;
 @property (nonatomic, copy) NSArray<NSString *> *mediaTypes;
 @property (nonatomic) NSUInteger minimumNumberOfItems;
 @property (nonatomic) NSUInteger maximumNumberOfItems;
-@property (nonatomic) BOOL originalImageNotRequired; // Result media info dictionary will only include UIImagePickerControllerReferenceURL and DCImagePickerControllerPHAsset
+@property (nonatomic) BOOL originalImageNotRequired; // If YES, result media info dictionary will only include UIImagePickerControllerReferenceURL and DCImagePickerControllerPHAsset
 
 @end
 
